@@ -1,3 +1,35 @@
 <resources>
-    <string name="app_name">Reto1MovilesGrupo2</string>
+    <string name="app_name">Elorrieta GYM</string>
+
+    <string name="nombreApp">Elorrieta Gym</string>
+    <string name="login">Login</string>
+    <string name="registro">Registro</string>
+    <string name="workout">Workout</string>
+    <string name="rememberMe">Remember me</string>
+    <string name="formatoFecha">aaaa-mm-dd</string>
+    <string name="cliente">Cliente</string>
+    <string name="entrenador">Entrenador</string>
+    <string name="volver">Volver</string>
+
+    <string name="usuarioLabel">Usuario</string>
+    <string name="claveLabel">Clave</string>
+    <string name="nombreLabel">Nombre</string>
+    <string name="apellidosLabel">Apellidos</string>
+    <string name="emailLabel">Email</string>
+    <string name="fechaLabel">Fecha Nacimiento</string>
+    <string name="tipo_de_usuario">Tipo de Usuario:</string>
+
+    <string name="nivel_de_usuario">Nivel de Usuario:</string>
+    <string name="perfil">Perfil</string>
+    <string name="guardar">Guardar</string>
+    <string name="atras">Atras</string>
+    <string name="nombre">Nombre</string>
+    <string name="descripcion">Descripcion</string>
+    <string name="nivel">Nivel</string>
+    <string name="video">Video</string>
+    <string name="anadir">Añadir</string>
+    <string name="modificar">Modificar</string>
+    <string name="eliminar">Eliminar</string>
+    <string name="filtrar">Filtrar</string>
+
 </resources>
