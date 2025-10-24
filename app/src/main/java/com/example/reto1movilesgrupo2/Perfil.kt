@@ -1,4 +1,6 @@
 package com.example.reto1movilesgrupo2
 
-class Perfil {
+import androidx.appcompat.app.AppCompatActivity
+
+class Perfil : AppCompatActivity() {
 }

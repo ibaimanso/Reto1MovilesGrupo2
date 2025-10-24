@@ -6,7 +6,7 @@
     <string name="registro">Registro</string>
     <string name="workout">Workout</string>
     <string name="rememberMe">Remember me</string>
-    <string name="formatoFecha">aaaa-mm-dd</string>
+    <string name="formatoFecha">AAAA-MM-DD</string>
     <string name="cliente">Cliente</string>
     <string name="entrenador">Entrenador</string>
     <string name="volver">Volver</string>
