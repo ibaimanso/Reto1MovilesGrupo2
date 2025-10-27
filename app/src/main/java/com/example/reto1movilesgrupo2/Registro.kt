@@ -11,6 +11,10 @@ import com.google.firebase.FirebaseApp
 import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.text.get
+import kotlin.text.matches
+import kotlin.text.set
+import kotlin.toString
 
 class Registro : AppCompatActivity() {
 
@@ -88,15 +92,13 @@ class Registro : AppCompatActivity() {
     }
 
     private fun registrarUsuario() {
-
-        val id = inputUsuario.text.toString().trim()
         val pw = inputClave.text.toString().trim()
         val name = inputNombre.text.toString().trim()
         val lname = inputApellidos.text.toString().trim()
         val email = inputEmail.text.toString().trim()
         val fechaNacimiento = inputFecha.text.toString().trim()
 
-        if (id.isEmpty() || pw.isEmpty() || name.isEmpty() || lname.isEmpty() ||
+        if (pw.isEmpty() || name.isEmpty() || lname.isEmpty() ||
             email.isEmpty() || fechaNacimiento.isEmpty()
         ) {
             Toast.makeText(this, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show()
@@ -114,32 +116,20 @@ class Registro : AppCompatActivity() {
             return
         }
 
-        db.collection("users").document(id).get()
-            .addOnSuccessListener { documento ->
-                if (documento.exists()) {
+        db.collection("users")
+            .whereEqualTo("email", email)
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                if (!querySnapshot.isEmpty) {
                     Toast.makeText(
                         this,
-                        "El nombre de usuario ya existe, prueba con otro!",
+                        "Este email ya está registrado, prueba con otro!",
                         Toast.LENGTH_SHORT
                     ).show()
                 } else {
-                    db.collection("users")
-                        .whereEqualTo("email", email)
-                        .get()
-                        .addOnSuccessListener { querySnapshot ->
-                            if (!querySnapshot.isEmpty) {
-                                Toast.makeText(
-                                    this,
-                                    "Este email ya está registrado, prueba con otro!",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            } else {
-                                guardarUsuario(id, pw, name, lname, email, fechaNacimiento)
-                            }
-                        }
-                        .addOnFailureListener { e ->
-                            Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
-                        }
+                    obtenerSiguienteId { nuevoId ->
+                        guardarUsuario(nuevoId, pw, name, lname, email, fechaNacimiento)
+                    }
                 }
             }
             .addOnFailureListener { e ->
@@ -147,8 +137,19 @@ class Registro : AppCompatActivity() {
             }
     }
 
+    private fun obtenerSiguienteId(callback: (Int) -> Unit) {
+        db.collection("users").get()
+            .addOnSuccessListener { querySnapshot ->
+                val nuevoId = querySnapshot.size() + 1
+                callback(nuevoId)
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Error al obtener ID: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+    }
+
     private fun guardarUsuario(
-        id: String, pw: String, name: String, lname: String,
+        id: Int, pw: String, name: String, lname: String,
         email: String, birth: String
     ) {
         val datosUsuario = hashMapOf(
@@ -163,7 +164,7 @@ class Registro : AppCompatActivity() {
             "lastMod" to Date()
         )
 
-        db.collection("users").document(id).set(datosUsuario)
+        db.collection("users").document(id.toString()).set(datosUsuario)
             .addOnSuccessListener {
                 val resultIntent = Intent().apply {
                     putExtra("registro_exitoso", true)
