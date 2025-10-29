@@ -77,7 +77,7 @@ class Perfil : AppCompatActivity() {
 
                     inputUsuario.setText(doc.getString("fname") ?: "")
                     inputNombre.setText(doc.getString("fname") ?: "")
-                    inputApellidos.setText(doc.getString("apellidos") ?: "")
+                    inputApellidos.setText(doc.getString("lname") ?: "")
                     inputEmail.setText(doc.getString("email") ?: "")
                     inputFecha.setText(doc.getString("birth") ?: "")
 
