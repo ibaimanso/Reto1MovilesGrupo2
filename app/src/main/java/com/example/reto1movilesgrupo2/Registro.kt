@@ -8,8 +8,10 @@ import android.util.Patterns
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.FirebaseApp
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.auth.User
+import kotlinx.coroutines.tasks.await
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.text.format
@@ -119,16 +121,16 @@ class Registro : AppCompatActivity() {
         }
 
         db.collection("users")
-            .whereEqualTo("email", email)
+            .whereEqualTo("fname", name)
             .get()
             .addOnSuccessListener { querySnapshot ->
                 if (!querySnapshot.isEmpty) {
                     Toast.makeText(
                         this,
-                        "Este email ya está registrado, prueba con otro!",
+                        "Este nombre ya está en uso, prueba con otro!",
                         Toast.LENGTH_SHORT
                     ).show()
-                } else if (comprobarLogin()){
+                } else {
                     obtenerSiguienteId { nuevoId ->
                         guardarUsuario(nuevoId, pw, name, lname, email, fechaNacimiento)
                     }
@@ -143,7 +145,7 @@ class Registro : AppCompatActivity() {
     private fun obtenerSiguienteId(callback: (Int) -> Unit) {
         db.collection("users").get()
             .addOnSuccessListener { querySnapshot ->
-                val nuevoId = querySnapshot.size()
+                val nuevoId = querySnapshot.size() + 1
                 callback(nuevoId)
             }
             .addOnFailureListener { e ->
@@ -201,12 +203,23 @@ class Registro : AppCompatActivity() {
 
     }
 
-    private fun comprobarLogin(): Boolean {
-
-        val user: String?;
+    private fun nombreExiste(fname: String): Boolean {
+        var ret = false
+        val name = inputNombre.text.toString().trim()
 
         db.collection("users")
+            .whereEqualTo("fname", fname)
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                if (name.equals(querySnapshot)) {
+                    ret = true
+                }
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Error al verificar nombre: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
 
+        return ret
     }
 
 }
