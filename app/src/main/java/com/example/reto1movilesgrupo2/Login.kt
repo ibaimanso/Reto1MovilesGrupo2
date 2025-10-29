@@ -72,7 +72,7 @@ class Login : AppCompatActivity() {
         btnLogin.isEnabled = false
 
         firestore.collection("users")
-            .whereEqualTo("lname", userInput)
+            .whereEqualTo("fname", userInput)
             .get()
             .addOnSuccessListener { querySnapshot ->
                 if (!querySnapshot.isEmpty) {

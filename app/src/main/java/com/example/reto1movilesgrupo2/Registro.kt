@@ -11,6 +11,7 @@ import com.google.firebase.FirebaseApp
 import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.text.format
 import kotlin.text.get
 import kotlin.text.matches
 import kotlin.text.set
@@ -140,7 +141,7 @@ class Registro : AppCompatActivity() {
     private fun obtenerSiguienteId(callback: (Int) -> Unit) {
         db.collection("users").get()
             .addOnSuccessListener { querySnapshot ->
-                val nuevoId = querySnapshot.size() + 1
+                val nuevoId = querySnapshot.size()
                 callback(nuevoId)
             }
             .addOnFailureListener { e ->
@@ -152,16 +153,20 @@ class Registro : AppCompatActivity() {
         id: Int, pw: String, name: String, lname: String,
         email: String, birth: String
     ) {
+        val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.getDefault())
+        sdf.timeZone = TimeZone.getDefault()
+        val lastModStr = sdf.format(Date())
+
         val datosUsuario = hashMapOf(
             "id" to id,
             "pw" to pw,
-            "name" to name,
+            "fname" to name,
             "lname" to lname,
             "email" to email,
             "birth" to birth,
             "level" to 0,
             "trainer" to esEntrenador,
-            "lastMod" to Date()
+            "lastMod" to lastModStr
         )
 
         db.collection("users").document(id.toString()).set(datosUsuario)

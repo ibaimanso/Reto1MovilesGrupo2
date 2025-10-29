@@ -75,7 +75,7 @@ class Perfil : AppCompatActivity() {
                     val doc = querySnapshot.documents[0]
                     documentId = doc.id
 
-                    inputUsuario.setText(doc.getString("lname") ?: "")
+                    inputUsuario.setText(doc.getString("fname") ?: "")
                     inputNombre.setText(doc.getString("fname") ?: "")
                     inputApellidos.setText(doc.getString("apellidos") ?: "")
                     inputEmail.setText(doc.getString("email") ?: "")
