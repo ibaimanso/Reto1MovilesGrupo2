@@ -9,6 +9,7 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.FirebaseApp
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.auth.User
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.text.format
@@ -127,10 +128,11 @@ class Registro : AppCompatActivity() {
                         "Este email ya está registrado, prueba con otro!",
                         Toast.LENGTH_SHORT
                     ).show()
-                } else {
+                } else if (comprobarLogin()){
                     obtenerSiguienteId { nuevoId ->
                         guardarUsuario(nuevoId, pw, name, lname, email, fechaNacimiento)
                     }
+                    Toast.makeText(this, "Registro realizado con éxito", Toast.LENGTH_SHORT).show()
                 }
             }
             .addOnFailureListener { e ->
@@ -196,5 +198,15 @@ class Registro : AppCompatActivity() {
         } catch (e: Exception) {
             false
         }
+
     }
+
+    private fun comprobarLogin(): Boolean {
+
+        val user: String?;
+
+        db.collection("users")
+
+    }
+
 }
