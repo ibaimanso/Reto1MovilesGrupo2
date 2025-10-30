@@ -31,5 +31,8 @@
     <string name="modificar">Modificar</string>
     <string name="eliminar">Eliminar</string>
     <string name="filtrar">Filtrar</string>
+    <string name="fecha">Fecha</string>
+    <string name="completado">% Completado</string>
+    <string name="tiempoTotal">Tiempo total</string>
 
 </resources>
