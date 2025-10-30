@@ -2,12 +2,16 @@ package com.example.reto1movilesgrupo2
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
-import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.os.LocaleListCompat
 import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -24,6 +28,8 @@ class Perfil : AppCompatActivity() {
     private lateinit var btnGuardar: Button
     private lateinit var btnAtras: Button
 
+    private lateinit var spinnerLanguage: Spinner
+
     private lateinit var firestore: FirebaseFirestore
     private var userId: String = ""
     private var documentId: String = ""
@@ -37,16 +43,13 @@ class Perfil : AppCompatActivity() {
         inputApellidos = findViewById(R.id.inputApellidosRegistro2)
         inputEmail = findViewById(R.id.inputEmailRegistro2)
         inputFecha = findViewById(R.id.inputFechaRegistro2)
-        spinnerGenero = findViewById(R.id.spinner2)
         btnGuardar = findViewById(R.id.btnGuardar)
         btnAtras = findViewById(R.id.btnAtras)
+        spinnerLanguage = findViewById(R.id.spinnerLanguage)
 
         firestore = FirebaseFirestore.getInstance()
 
-        val generos = arrayOf("Masculino", "Femenino", "Otro")
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, generos)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinnerGenero.adapter = adapter
+
 
         userId = intent.getStringExtra("USERNAME") ?: ""
 
@@ -64,6 +67,40 @@ class Perfil : AppCompatActivity() {
         btnGuardar.setOnClickListener {
             guardarCambios()
         }
+
+        initLanguageSpinner()
+    }
+
+    private fun initLanguageSpinner() {
+        val languages = arrayOf(getString(R.string.language_spanish), getString(R.string.language_english))
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, languages)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerLanguage.adapter = adapter
+
+        spinnerLanguage.setSelection(0)
+
+        spinnerLanguage.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val languageCode = when (position) {
+                    0 -> "es"
+                    1 -> "en"
+                    else -> "es"
+                }
+                val currentLocale = AppCompatDelegate.getApplicationLocales()[0]?.language
+                if (currentLocale != languageCode) {
+                    setLocale(languageCode)
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // No es necesario hacer nada aquí
+            }
+        }
+    }
+
+    private fun setLocale(languageCode: String) {
+        val appLocale: LocaleListCompat = LocaleListCompat.forLanguageTags(languageCode)
+        AppCompatDelegate.setApplicationLocales(appLocale)
     }
 
     private fun cargarDatosUsuario() {
@@ -77,16 +114,11 @@ class Perfil : AppCompatActivity() {
 
                     inputUsuario.setText(doc.getString("fname") ?: "")
                     inputNombre.setText(doc.getString("fname") ?: "")
-                    inputApellidos.setText(doc.getString("lname") ?: "")
+                    inputApellidos.setText(doc.getString("lname ") ?: "")
                     inputEmail.setText(doc.getString("email") ?: "")
                     inputFecha.setText(doc.getString("birth") ?: "")
 
-                    val genero = doc.getString("genero") ?: "Masculino"
-                    val generos = arrayOf("Masculino", "Femenino", "Otro")
-                    val position = generos.indexOf(genero)
-                    if (position >= 0) {
-                        spinnerGenero.setSelection(position)
-                    }
+
                 } else {
                     Toast.makeText(this, "No se encontraron datos del usuario", Toast.LENGTH_SHORT).show()
                     finish()
@@ -113,7 +145,6 @@ class Perfil : AppCompatActivity() {
             "apellidos" to inputApellidos.text.toString(),
             "email" to inputEmail.text.toString(),
             "birth" to inputFecha.text.toString(),
-            "genero" to spinnerGenero.selectedItem.toString(),
             "lastMod" to currentDate
         )
 

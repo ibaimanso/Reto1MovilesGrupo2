@@ -32,4 +32,12 @@
     <string name="eliminar">Eliminar</string>
     <string name="filtrar">Filtrar</string>
 
+    <!-- Strings para alternador de idioma -->
+    <string name="language_label">Idioma</string>
+    <string name="language_spanish">Español</string>
+    <string name="language_english">Inglés</string>
+
+    <!-- Strings para accesibilidad y UI -->
+    <string name="theme_dark">Tema oscuro</string>
+    <string name="app_logo_desc">Logo de la aplicación</string>
 </resources>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Elorrieta GYM</string>
+
+    <string name="nombreApp">Elorrieta Gym</string>
+    <string name="login">Login</string>
+    <string name="registro">Register</string>
+    <string name="workout">Workout</string>
+    <string name="rememberMe">Remember me</string>
+    <string name="formatoFecha">YYYY-MM-DD</string>
+    <string name="cliente">Client</string>
+    <string name="entrenador">Trainer</string>
+    <string name="volver">Back</string>
+
+    <string name="usuarioLabel">Username</string>
+    <string name="claveLabel">Password</string>
+    <string name="nombreLabel">Name</string>
+    <string name="apellidosLabel">Last name</string>
+    <string name="emailLabel">Email</string>
+    <string name="fechaLabel">Birth date</string>
+    <string name="tipo_de_usuario">User type:</string>
+
+    <string name="nivel_de_usuario">User level:</string>
+    <string name="perfil">Profile</string>
+    <string name="guardar">Save</string>
+    <string name="atras">Back</string>
+    <string name="nombre">Name</string>
+    <string name="descripcion">Description</string>
+    <string name="nivel">Level</string>
+    <string name="video">Video</string>
+    <string name="anadir">Add</string>
+    <string name="modificar">Edit</string>
+    <string name="eliminar">Delete</string>
+    <string name="filtrar">Filter</string>
+
+    <!-- Strings para alternador de idioma -->
+    <string name="language_label">Language</string>
+    <string name="language_spanish">Spanish</string>
+    <string name="language_english">English</string>
+</resources>
