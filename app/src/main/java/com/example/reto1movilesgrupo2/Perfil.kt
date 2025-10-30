@@ -20,6 +20,7 @@ class Perfil : AppCompatActivity() {
     private lateinit var inputApellidos: EditText
     private lateinit var inputEmail: EditText
     private lateinit var inputFecha: EditText
+    private lateinit var spinnerGenero: Spinner
     private lateinit var btnGuardar: Button
     private lateinit var btnAtras: Button
 
@@ -36,10 +37,16 @@ class Perfil : AppCompatActivity() {
         inputApellidos = findViewById(R.id.inputApellidosRegistro2)
         inputEmail = findViewById(R.id.inputEmailRegistro2)
         inputFecha = findViewById(R.id.inputFechaRegistro2)
+        spinnerGenero = findViewById(R.id.spinner2)
         btnGuardar = findViewById(R.id.btnGuardar)
         btnAtras = findViewById(R.id.btnAtras)
 
         firestore = FirebaseFirestore.getInstance()
+
+        val generos = arrayOf("Masculino", "Femenino", "Otro")
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, generos)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerGenero.adapter = adapter
 
         userId = intent.getStringExtra("USERNAME") ?: ""
 
@@ -74,6 +81,12 @@ class Perfil : AppCompatActivity() {
                     inputEmail.setText(doc.getString("email") ?: "")
                     inputFecha.setText(doc.getString("birth") ?: "")
 
+                    val genero = doc.getString("genero") ?: "Masculino"
+                    val generos = arrayOf("Masculino", "Femenino", "Otro")
+                    val position = generos.indexOf(genero)
+                    if (position >= 0) {
+                        spinnerGenero.setSelection(position)
+                    }
                 } else {
                     Toast.makeText(this, "No se encontraron datos del usuario", Toast.LENGTH_SHORT).show()
                     finish()
@@ -100,6 +113,7 @@ class Perfil : AppCompatActivity() {
             "apellidos" to inputApellidos.text.toString(),
             "email" to inputEmail.text.toString(),
             "birth" to inputFecha.text.toString(),
+            "genero" to spinnerGenero.selectedItem.toString(),
             "lastMod" to currentDate
         )
 
@@ -113,6 +127,4 @@ class Perfil : AppCompatActivity() {
                 Toast.makeText(this, "Error al guardar cambios", Toast.LENGTH_SHORT).show()
             }
     }
-    // asdasd
-
 }
