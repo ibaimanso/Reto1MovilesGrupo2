@@ -33,6 +33,7 @@ class UserController : AppCompatActivity() {
     }
 
     suspend fun insert(newUser: User) {
+        newUser.id = nextId()
         ManagerFactory().getUserManager().insert(newUser)
     }
 
@@ -42,5 +43,9 @@ class UserController : AppCompatActivity() {
 
     suspend fun delete(userToDelete: User) {
         ManagerFactory().getUserManager().delete(userToDelete)
+    }
+
+    suspend fun existUser(user: User) {
+
     }
 }
