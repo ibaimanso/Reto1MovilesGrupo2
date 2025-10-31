@@ -18,6 +18,9 @@
             android:name=".controllers.UserExerciseLineController"
             android:exported="false" />
         <activity
+            android:name=".controllers.SerieController"
+            android:exported="false" />
+        <activity
             android:name=".controllers.ExerciseController"
             android:exported="false" />
         <activity

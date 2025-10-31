@@ -14,20 +14,20 @@ class UserController : AppCompatActivity() {
         super.onCreate(savedInstanceState)
     }
 
-    public fun selectAll(): MutableList<User> {
+    suspend fun selectAll(): MutableList<User> {
         //var users: MutableList<User> = mutableListOf()
         return ManagerFactory().getUserManager().selectAll()
     }
 
-    public fun insert(newUser: User) {
+    suspend fun insert(newUser: User) {
         ManagerFactory().getUserManager().insert(newUser)
     }
 
-    public fun update(userToUpdate: User) {
+    suspend fun update(userToUpdate: User) {
         ManagerFactory().getUserManager().update(userToUpdate)
     }
 
-    public fun delete(userToDelete: User) {
+    suspend fun delete(userToDelete: User) {
         ManagerFactory().getUserManager().delete(userToDelete)
     }
 }

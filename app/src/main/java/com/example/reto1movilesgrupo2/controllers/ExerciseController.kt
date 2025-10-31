@@ -15,19 +15,19 @@ class ExerciseController : AppCompatActivity() {
         super.onCreate(savedInstanceState)
     }
 
-    public fun selectAll(): MutableList<Exercise> {
+    suspend fun selectAll(): MutableList<Exercise> {
         return ManagerFactory().getExerciseManager().selectAll()
     }
 
-    public fun insert(newExercise: Exercise) {
+    suspend fun insert(newExercise: Exercise) {
         ManagerFactory().getExerciseManager().insert(newExercise)
     }
 
-    public fun update(exerciseToUpdate: Exercise) {
+    suspend fun update(exerciseToUpdate: Exercise) {
         ManagerFactory().getExerciseManager().update(exerciseToUpdate)
     }
 
-    public fun delete(exerciseToDelete: Exercise) {
+    suspend fun delete(exerciseToDelete: Exercise) {
         ManagerFactory().getExerciseManager().delete(exerciseToDelete)
     }
 }
