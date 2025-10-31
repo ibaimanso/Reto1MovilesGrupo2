@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -14,7 +16,16 @@ import kotlinx.coroutines.launch
 
 class WorkoutsActivity : AppCompatActivity() {
 
-    private lateinit var btnBack: Button
+    private lateinit var btnProfile: Button
+    private lateinit var btnBack:    Button
+    private lateinit var btnFilter:  Button
+    private lateinit var btnTrainer: Button
+
+    private lateinit var logo: ImageView
+
+    private lateinit var userLevel: TextView
+
+    private lateinit var inputLevelFilter: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,9 +37,25 @@ class WorkoutsActivity : AppCompatActivity() {
             insets
         }
 
-        btnBack = findViewById(R.id.btnBack)
+        logo = findViewById(R.id.appLogo)
+        logo.setImageResource(R.mipmap.iconogym)
+
+        btnProfile = findViewById(R.id.btnProfile)
+        btnBack    = findViewById(R.id.btnBack)
+        btnFilter  = findViewById(R.id.btnFilter)
+        btnTrainer = findViewById(R.id.btnTrainer)
+
+        val userName = intent.getStringExtra("USERFNAME")
+
+        // Tenemos el usuario, hay que comprobar si es entrenador o no y mostrar o no el botón entrenador
+
+
         btnBack.setOnClickListener {
             goBack()
+        }
+
+        btnTrainer.setOnClickListener {
+            goToTrainer()
         }
     }
 
@@ -37,4 +64,13 @@ class WorkoutsActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
+
+    private fun goToTrainer() {
+        val intent = Intent(this, EntrenadorActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+
+
 }
