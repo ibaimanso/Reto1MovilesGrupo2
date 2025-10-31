@@ -30,4 +30,17 @@ class ExerciseController : AppCompatActivity() {
     suspend fun delete(exerciseToDelete: Exercise) {
         ManagerFactory().getExerciseManager().delete(exerciseToDelete)
     }
+
+    suspend fun selectAllByWorkout(workout: Workout): MutableList<Exercise> {
+        val ret: MutableList<Exercise> = mutableListOf()
+        val exercises: MutableList<Exercise> = ManagerFactory().getExerciseManager().selectAll()
+
+        for (exercise: Exercise in exercises) {
+            if (exercise.workoutId == workout.id) {
+                ret.add(exercise)
+            }
+        }
+
+        return ret
+    }
 }

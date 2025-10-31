@@ -1,7 +1,7 @@
 package com.example.reto1movilesgrupo2.entities
 
 data class UserWorkoutLine (
-    val userId: Int = 0,
-    val workoutId: Int = 0,
-    val doneDate: String? = null,
+    var userId: Int = 0,
+    var workoutId: Int = 0,
+    var doneDate: String? = null,
 )

@@ -14,12 +14,26 @@ class UserController : AppCompatActivity() {
         super.onCreate(savedInstanceState)
     }
 
+    private suspend fun nextId(): Int {
+        val users: MutableList<User> = selectAll()
+        var maxId = 0;
+
+        for (user: User in users) {
+            if (user.id > maxId) {
+                maxId = user.id
+            }
+        }
+
+        return maxId + 1
+    }
+
     suspend fun selectAll(): MutableList<User> {
         //var users: MutableList<User> = mutableListOf()
         return ManagerFactory().getUserManager().selectAll()
     }
 
     suspend fun insert(newUser: User) {
+        newUser.id = nextId()
         ManagerFactory().getUserManager().insert(newUser)
     }
 
@@ -29,5 +43,9 @@ class UserController : AppCompatActivity() {
 
     suspend fun delete(userToDelete: User) {
         ManagerFactory().getUserManager().delete(userToDelete)
+    }
+
+    suspend fun existUser(user: User) {
+
     }
 }
