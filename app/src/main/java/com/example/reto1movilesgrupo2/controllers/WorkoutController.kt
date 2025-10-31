@@ -15,19 +15,19 @@ class WorkoutController : AppCompatActivity() {
         super.onCreate(savedInstanceState)
     }
 
-    public fun selectAll(): MutableList<Workout> {
+    suspend fun selectAll(): MutableList<Workout> {
         return ManagerFactory().getWorkoutManager().selectAll()
     }
 
-    public fun insert(newWorkout: Workout) {
+    suspend fun insert(newWorkout: Workout) {
         ManagerFactory().getWorkoutManager().insert(newWorkout)
     }
 
-    public fun update(workoutToUpdate: Workout) {
+    suspend fun update(workoutToUpdate: Workout) {
         ManagerFactory().getWorkoutManager().update(workoutToUpdate)
     }
 
-    public fun delete(workoutToDelete: Workout) {
+    suspend fun delete(workoutToDelete: Workout) {
         ManagerFactory().getWorkoutManager().delete(workoutToDelete)
     }
 }
