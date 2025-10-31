@@ -8,6 +8,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.reto1movilesgrupo2.R
 import com.example.reto1movilesgrupo2.entities.Exercise
 import com.example.reto1movilesgrupo2.entities.Serie
+import com.example.reto1movilesgrupo2.entities.Workout
 import com.example.reto1movilesgrupo2.firebase.ManagerFactory
 
 class SerieController : AppCompatActivity() {
@@ -29,5 +30,18 @@ class SerieController : AppCompatActivity() {
 
     suspend fun delete(serieToDelete: Serie) {
         ManagerFactory().getSerieManager().delete(serieToDelete)
+    }
+
+    suspend fun selectAllByExercise(exercise: Exercise): MutableList<Serie> {
+        val ret: MutableList<Serie> = mutableListOf()
+        val series: MutableList<Serie> = ManagerFactory().getSerieManager().selectAll()
+
+        for (serie: Serie in series) {
+            if (serie.exerciseId == exercise.id) {
+                ret.add(serie)
+            }
+        }
+
+        return ret
     }
 }
