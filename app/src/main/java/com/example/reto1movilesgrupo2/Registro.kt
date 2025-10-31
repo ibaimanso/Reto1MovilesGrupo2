@@ -44,7 +44,7 @@ class Registro : AppCompatActivity() {
             db = FirebaseFirestore.getInstance()
 
             setContentView(R.layout.activity_registro)
-
+            /*
             inputUsuario = findViewById(R.id.inputUsuarioRegistro)
             inputClave = findViewById(R.id.inputClaveRegistro)
             inputNombre = findViewById(R.id.inputNombreRegistro)
@@ -52,8 +52,9 @@ class Registro : AppCompatActivity() {
             inputEmail = findViewById(R.id.inputEmailRegistro)
             inputFecha = findViewById(R.id.inputFechaRegistro)
             spinner = findViewById(R.id.spinner)
-            btnRegistro = findViewById(R.id.registroButton2)
-            btnVolver = findViewById(R.id.registroButton3)
+            btnRegistro = findViewById(R.id.registroButton)
+            btnVolver = findViewById(R.id.btnVolver)
+            */
 
             inputClave.transformationMethod = PasswordTransformationMethod.getInstance()
 

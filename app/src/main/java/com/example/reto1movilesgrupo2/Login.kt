@@ -25,13 +25,13 @@ class Login : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-
+        /*
         inputUsuario = findViewById(R.id.inputUsuarioLogin)
         inputClave = findViewById(R.id.inputClaveLogin)
         btnLogin = findViewById(R.id.loginButton)
         btnRegistro = findViewById(R.id.registroButton)
         checkRecordar = findViewById(R.id.checkBox)
-
+        */
         FirebaseApp.initializeApp(this)
         firestore = FirebaseFirestore.getInstance()
 

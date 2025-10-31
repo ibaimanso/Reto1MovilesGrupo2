@@ -28,7 +28,6 @@ class UserController : AppCompatActivity() {
     }
 
     suspend fun selectAll(): MutableList<User> {
-        //var users: MutableList<User> = mutableListOf()
         return ManagerFactory().getUserManager().selectAll()
     }
 
