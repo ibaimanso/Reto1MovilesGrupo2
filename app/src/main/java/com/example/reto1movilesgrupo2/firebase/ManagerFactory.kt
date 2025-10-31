@@ -1,5 +1,6 @@
 package com.example.reto1movilesgrupo2.firebase
 
+import com.example.reto1movilesgrupo2.entities.UserExerciseLine
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
@@ -29,8 +30,8 @@ class ManagerFactory {
         return SerieManager()
     }
 
-    public fun getUserExerciseLineManager(): UserManager {
-        return UserManager()
+    public fun getUserExerciseLineManager(): UserExerciseLineManager {
+        return UserExerciseLineManager()
     }
 
     public fun getUserManager(): UserManager {
