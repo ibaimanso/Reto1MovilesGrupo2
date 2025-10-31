@@ -5,7 +5,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.reto1prueba.R
+import com.example.reto1movilesgrupo2.R
 
 class EntrenadorActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

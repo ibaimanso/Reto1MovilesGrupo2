@@ -21,4 +21,32 @@ class ManagerFactory {
         return FirebaseFirestore.getInstance().collection(collectionName)
     }
 
+    public fun getExerciseManager(): ExerciseManager {
+        return ExerciseManager()
+    }
+
+    public fun getSerieManager(): SerieManager {
+        return SerieManager()
+    }
+
+    public fun getUserExerciseLineManager(): UserManager {
+        return UserManager()
+    }
+
+    public fun getUserManager(): UserManager {
+        return UserManager()
+    }
+
+    public fun getUserSerieLineManager(): UserSerieLineManager {
+        return UserSerieLineManager()
+    }
+
+    public fun getUserWorkoutLineManager(): UserWorkoutLineManager {
+        return UserWorkoutLineManager()
+    }
+
+    public fun getWorkoutManager(): WorkoutManager {
+        return WorkoutManager()
+    }
+
 }
