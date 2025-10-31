@@ -35,7 +35,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.008" />
 
-
     <ImageView
         android:id="@+id/appLogoWorkout"
         android:layout_width="103dp"
@@ -111,63 +110,79 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.225" />
 
+
     <ScrollView
-        android:layout_width="363dp"
-        android:layout_height="414dp"
+        android:layout_width="387dp"
+        android:layout_height="431dp"
         android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.693">
+        app:layout_constraintVertical_bias="0.7">
 
-        <TableLayout
-            android:id="@+id/workoutTable"
+        <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            android:divider="@android:color/darker_gray"
-            android:showDividers="middle"
-            android:stretchColumns="*">
+            android:fillViewport="true"
+            android:scrollbars="horizontal">
 
-            <TableRow
-                android:layout_width="372dp"
-                android:background="#EEEEEE"
-                android:padding="8dp">
+            <TableLayout
+                android:id="@+id/workoutTable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:stretchColumns="*"
+                android:divider="@android:color/darker_gray"
+                android:showDividers="middle"
+                android:layout_marginTop="16dp"
+                android:layout_marginHorizontal="8dp"
+                android:background="@android:color/white" >
 
-                <TextView
-                    android:gravity="center"
-                    android:padding="8dp"
-                    android:text="@string/nombre"
-                    android:textStyle="bold" />
+                <TableRow
+                    android:background="#EEEEEE"
+                    android:padding="8dp">
 
-                <TextView
-                    android:gravity="center"
-                    android:padding="8dp"
-                    android:text="@string/nivel"
-                    android:textStyle="bold" />
+                    <TextView
+                        android:text="Nombre"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:padding="8dp" />
 
-                <TextView
-                    android:gravity="center"
-                    android:padding="8dp"
-                    android:text="@string/fecha"
-                    android:textStyle="bold" />
+                    <TextView
+                        android:text="Nivel"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:padding="8dp" />
 
-                <TextView
-                    android:gravity="center"
-                    android:padding="8dp"
-                    android:text="@string/completado"
-                    android:textStyle="bold" />
+                    <TextView
+                        android:text="Tiempo"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:padding="8dp" />
 
-                <TextView
-                    android:gravity="center"
-                    android:padding="8dp"
-                    android:text="@string/tiempoTotal"
-                    android:textStyle="bold" />
+                    <TextView
+                        android:text="Fecha"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:padding="8dp" />
 
-            </TableRow>
+                    <TextView
+                        android:text="Completo"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:padding="8dp" />
 
-        </TableLayout>
+                    <TextView
+                        android:text="Video"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:padding="8dp" />
+
+                </TableRow>
+            </TableLayout>
+        </HorizontalScrollView>
     </ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

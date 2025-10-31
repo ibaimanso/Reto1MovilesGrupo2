@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "225315790491",
+    "project_id": "reto1db-863a2",
+    "storage_bucket": "reto1db-863a2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:225315790491:android:74f3682e9715808c3bb03e",
+        "android_client_info": {
+          "package_name": "com.example.reto1movilesgrupo2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGDctqiO8MAgRa9LVQ36nM6niqdVL_LOY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
