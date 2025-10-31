@@ -28,17 +28,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Registro"
+            android:name=".activities.EntrenadorActivity"
             android:exported="true" />
         <activity
-            android:name=".Entrenador"
+            android:name=".activities.LoginActivity"
             android:exported="true" />
         <activity
-            android:name=".Perfil"
+            android:name=".activities.PerfilActivity"
             android:exported="true" />
         <activity
-            android:name=".Workouts"
+            android:name=".activities.RegistroActivity"
             android:exported="true" />
+        <activity
+            android:name=".activities.WorkoutsActivity"
+            android:exported="true"/>
     </application>
 
 </manifest>
