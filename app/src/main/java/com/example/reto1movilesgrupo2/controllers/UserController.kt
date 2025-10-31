@@ -49,6 +49,16 @@ class UserController : AppCompatActivity() {
         val users: MutableList<User> = selectAll()
 
         for (user: User in users) {
+            if (userToCheck.fname.equals(user.fname)) return true
+        }
+
+        return false
+    }
+
+    suspend fun existLogin(userToCheck: User): Boolean {
+        val users: MutableList<User> = selectAll()
+
+        for (user: User in users) {
             if (!userToCheck.fname.equals(user.fname)) continue
 
             return userToCheck.pw.equals(user.pw)
