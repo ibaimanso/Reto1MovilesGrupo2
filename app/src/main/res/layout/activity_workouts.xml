@@ -7,22 +7,20 @@
     android:layout_height="match_parent"
     tools:context=".activities.WorkoutsActivity">
 
-    <TextView
-        android:id="@+id/lblnivelUsuarioWorkouts"
-        android:layout_width="164dp"
-        android:layout_height="32dp"
-        android:text="@string/nivel_de_usuario"
-        android:textAlignment="center"
-        android:textSize="20sp"
+    <Button
+        android:id="@+id/btnPerfil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Perfil"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.064"
+        app:layout_constraintHorizontal_bias="0.024"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.108" />
+        app:layout_constraintVertical_bias="0.007" />
 
     <TextView
-        android:id="@+id/tituloWorkouts"
+        android:id="@+id/titleWorkouts"
         android:layout_width="192dp"
         android:layout_height="58dp"
         android:text="@string/workout"
@@ -47,44 +45,22 @@
         app:layout_constraintVertical_bias="0.007"
         tools:src="@tools:sample/avatars" />
 
-    <Button
-        android:id="@+id/btnVolver"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/volver"
+    <TextView
+        android:id="@+id/lblUserLevel"
+        android:layout_width="164dp"
+        android:layout_height="32dp"
+        android:text="@string/nivel_de_usuario"
+        android:textAlignment="center"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.064"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.954" />
-
-    <Button
-        android:id="@+id/btnPerfil"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Perfil"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.049"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
-
-    <Button
-        android:id="@+id/btnFiltrar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/filtrar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.139"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.225" />
+        app:layout_constraintVertical_bias="0.108" />
 
     <TextView
-        android:id="@+id/nivelUsuario"
+        android:id="@+id/userLevel"
         android:layout_width="40dp"
         android:layout_height="32dp"
         android:text="asd"
@@ -96,8 +72,20 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.108" />
 
+    <Button
+        android:id="@+id/btnFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/filtrar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.139"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.225" />
+
     <EditText
-        android:id="@+id/inputFiltroNivel"
+        android:id="@+id/inputLevelFilter"
         android:layout_width="193dp"
         android:layout_height="48dp"
         android:ems="10"
@@ -109,7 +97,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.225" />
-
 
     <ScrollView
         android:layout_width="387dp"
@@ -174,7 +161,7 @@
                         android:padding="8dp" />
 
                     <TextView
-                        android:text="Video"
+                        android:text="@string/video"
                         android:textStyle="bold"
                         android:gravity="center"
                         android:padding="8dp" />
@@ -183,5 +170,17 @@
             </TableLayout>
         </HorizontalScrollView>
     </ScrollView>
+
+    <Button
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/volver"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.954" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
