@@ -1,14 +1,14 @@
 package com.example.reto1movilesgrupo2.entities
 
 data class User (
-    val trainer: Boolean = false,
-    val id: Int = 0,
-    val level: Int = 0,
-    val fname: String? = null,
-    val lname: String? = null,
-    val pw: String? = null,
-    val email: String? = null,
-    val birth: String? = null,
-    val lastMod: String? = null
+    var trainer: Boolean = false,
+    var id: Int = 0,
+    var level: Int = 0,
+    var fname: String? = null,
+    var lname: String? = null,
+    var pw: String? = null,
+    var email: String? = null,
+    var birth: String? = null,
+    var lastMod: String? = null
 )
 
