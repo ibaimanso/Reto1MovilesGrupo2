@@ -45,7 +45,15 @@ class UserController : AppCompatActivity() {
         ManagerFactory().getUserManager().delete(userToDelete)
     }
 
-    suspend fun existUser(user: User) {
+    suspend fun existUser(userToCheck: User): Boolean {
+        val users: MutableList<User> = selectAll()
 
+        for (user: User in users) {
+            if (!userToCheck.fname.equals(user.fname)) continue
+
+            return userToCheck.pw.equals(user.pw)
+        }
+
+        return false
     }
 }
