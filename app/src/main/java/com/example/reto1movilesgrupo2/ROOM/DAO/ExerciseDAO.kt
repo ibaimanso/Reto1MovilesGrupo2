@@ -1,9 +1,10 @@
-package com.example.reto1prueba.ROOM.DAO
+package com.example.reto1movilesgrupo2.ROOM.DAO
+
 
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import com.example.reto1prueba.ROOM.entitites.Exercise
+import com.example.reto1movilesgrupo2.ROOM.entitites.Exercise
 
 interface ExerciseDAO {
 

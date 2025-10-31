@@ -1,4 +1,4 @@
-package com.example.reto1prueba.ROOM.DAO
+package com.example.reto1movilesgrupo2.ROOM.DAO
 
 class UserExerciseLineDAO {
 }

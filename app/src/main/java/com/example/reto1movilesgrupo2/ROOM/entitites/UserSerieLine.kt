@@ -1,4 +1,4 @@
-package com.example.reto1prueba.ROOM.entitites
+package com.example.reto1movilesgrupo2.ROOM.entitites
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
