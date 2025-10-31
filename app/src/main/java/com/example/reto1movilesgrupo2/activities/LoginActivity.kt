@@ -1,6 +1,9 @@
 package com.example.reto1movilesgrupo2.activities
 
 import android.os.Bundle
+import android.widget.Button
+import android.widget.CheckBox
+import android.widget.EditText
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -8,6 +11,13 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.reto1movilesgrupo2.R
 
 class LoginActivity : AppCompatActivity() {
+
+    private lateinit var inputUser: EditText
+    private lateinit var inputPassword: EditText
+    private lateinit var btnLogin: Button
+    private lateinit var btnRegister: Button
+    private lateinit var checkBox: CheckBox
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -17,5 +27,13 @@ class LoginActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+
+
     }
+
+    fun login() {
+        
+    }
+
 }
