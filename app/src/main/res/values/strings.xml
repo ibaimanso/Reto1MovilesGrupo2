@@ -32,7 +32,7 @@
     <string name="eliminar">Eliminar</string>
     <string name="filtrar">Filtrar</string>
     <string name="fecha">Fecha</string>
-    <string name="completado">% Completado</string>
+    <string name="completado">%</string>
     <string name="tiempoTotal">Tiempo total</string>
 
     <!-- Strings para alternador de idioma -->
