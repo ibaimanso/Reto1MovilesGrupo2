@@ -29,5 +29,4 @@ class UserExerciseLineController : AppCompatActivity() {
     suspend fun delete(userExerciseLineToDelete: UserExerciseLine) {
         return ManagerFactory().getUserExerciseLineManager().delete(userExerciseLineToDelete)
     }
-
 }
