@@ -25,7 +25,14 @@
             android:exported="false" />
         <activity
             android:name=".activities.LoginActivity"
-            android:exported="false" />
+            android:exported="true"
+            tools:ignore="Instantiatable">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".activities.EntrenadorActivity"
             android:exported="false" />
@@ -53,16 +60,6 @@
         <activity
             android:name=".controllers.UserController"
             android:exported="false" />
-        <activity
-            android:name=".Login"
-            android:exported="true"
-            tools:ignore="Instantiatable">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>
