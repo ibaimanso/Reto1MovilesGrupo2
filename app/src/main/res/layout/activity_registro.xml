@@ -5,10 +5,10 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Registro">
+    tools:context=".activities.RegistroActivity">
 
     <Button
-        android:id="@+id/registroButton2"
+        android:id="@+id/registroButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/registro"
@@ -20,7 +20,7 @@
         app:layout_constraintVertical_bias="0.93" />
 
     <Button
-        android:id="@+id/registroButton3"
+        android:id="@+id/registroVolverButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/volver"
@@ -99,7 +99,7 @@
         app:layout_constraintVertical_bias="0.73" />
 
     <TextView
-        android:id="@+id/claveRegistro"
+        android:id="@+id/lblClaveRegistro"
         android:layout_width="80dp"
         android:layout_height="30dp"
         android:text="@string/claveLabel"
@@ -113,7 +113,7 @@
         app:layout_constraintVertical_bias="0.45" />
 
     <TextView
-        android:id="@+id/nombreRegistro"
+        android:id="@+id/lblNombreRegistro"
         android:layout_width="100dp"
         android:layout_height="30dp"
         android:text="@string/nombreLabel"
@@ -127,7 +127,7 @@
         app:layout_constraintVertical_bias="0.52" />
 
     <TextView
-        android:id="@+id/apellidosRegistro"
+        android:id="@+id/lblApellidosRegistro"
         android:layout_width="100dp"
         android:layout_height="30dp"
         android:text="@string/apellidosLabel"
@@ -141,7 +141,7 @@
         app:layout_constraintVertical_bias="0.59" />
 
     <TextView
-        android:id="@+id/emailRegistro"
+        android:id="@+id/lblEmailRegistro"
         android:layout_width="100dp"
         android:layout_height="30dp"
         android:text="@string/emailLabel"
@@ -155,7 +155,7 @@
         app:layout_constraintVertical_bias="0.66" />
 
     <TextView
-        android:id="@+id/fechaRegistro"
+        android:id="@+id/lblFechaRegistro"
         android:layout_width="148dp"
         android:layout_height="30sp"
         android:text="@string/fechaLabel"
@@ -169,7 +169,7 @@
         app:layout_constraintVertical_bias="0.732" />
 
     <TextView
-        android:id="@+id/tipoUsuario"
+        android:id="@+id/lblTipoUsuario"
         android:layout_width="148dp"
         android:layout_height="30sp"
         android:text="@string/tipo_de_usuario"
@@ -183,7 +183,7 @@
         app:layout_constraintVertical_bias="0.788" />
 
     <TextView
-        android:id="@+id/usuarioRegistro"
+        android:id="@+id/lblUsuarioRegistro"
         android:layout_width="100dp"
         android:layout_height="30dp"
         android:text="@string/usuarioLabel"
@@ -245,4 +245,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.835" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

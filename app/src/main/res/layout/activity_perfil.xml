@@ -5,10 +5,10 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Perfil">
+    tools:context=".activities.PerfilActivity">
 
     <EditText
-        android:id="@+id/inputFechaRegistro2"
+        android:id="@+id/inputFechaPerfil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -23,7 +23,7 @@
         app:layout_constraintVertical_bias="0.711" />
 
     <EditText
-        android:id="@+id/inputEmailRegistro2"
+        android:id="@+id/inputEmailPerfil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -38,7 +38,7 @@
         app:layout_constraintVertical_bias="0.623" />
 
     <EditText
-        android:id="@+id/inputUsuarioRegistro2"
+        android:id="@+id/inputUsuarioPerfil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -53,7 +53,7 @@
         app:layout_constraintVertical_bias="0.362" />
 
     <EditText
-        android:id="@+id/inputNombreRegistro2"
+        android:id="@+id/inputNombrePerfil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -68,7 +68,7 @@
         app:layout_constraintVertical_bias="0.45" />
 
     <EditText
-        android:id="@+id/inputApellidosRegistro2"
+        android:id="@+id/inputApellidosPerfil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -83,7 +83,7 @@
         app:layout_constraintVertical_bias="0.537" />
 
     <ImageView
-        android:id="@+id/appLogoRegistro2"
+        android:id="@+id/appLogoPerfil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/app_logo_desc"

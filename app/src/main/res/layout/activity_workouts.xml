@@ -5,10 +5,10 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Workouts">
+    tools:context=".activities.WorkoutsActivity">
 
     <TextView
-        android:id="@+id/lblnivelUsuario"
+        android:id="@+id/lblnivelUsuarioWorkouts"
         android:layout_width="164dp"
         android:layout_height="32dp"
         android:text="@string/nivel_de_usuario"
@@ -22,7 +22,7 @@
         app:layout_constraintVertical_bias="0.108" />
 
     <TextView
-        android:id="@+id/tituloRegistro2"
+        android:id="@+id/tituloWorkouts"
         android:layout_width="192dp"
         android:layout_height="58dp"
         android:text="@string/workout"
@@ -144,31 +144,31 @@
                     android:padding="8dp">
 
                     <TextView
-                        android:text="Nombre"
+                        android:text="@string/nombre"
                         android:textStyle="bold"
                         android:gravity="center"
                         android:padding="8dp" />
 
                     <TextView
-                        android:text="Nivel"
+                        android:text="@string/nivel"
                         android:textStyle="bold"
                         android:gravity="center"
                         android:padding="8dp" />
 
                     <TextView
-                        android:text="Tiempo"
+                        android:text="@string/tiempoTotal"
                         android:textStyle="bold"
                         android:gravity="center"
                         android:padding="8dp" />
 
                     <TextView
-                        android:text="Fecha"
+                        android:text="@string/fecha"
                         android:textStyle="bold"
                         android:gravity="center"
                         android:padding="8dp" />
 
                     <TextView
-                        android:text="Completo"
+                        android:text="@string/completado"
                         android:textStyle="bold"
                         android:gravity="center"
                         android:padding="8dp" />
@@ -183,6 +183,5 @@
             </TableLayout>
         </HorizontalScrollView>
     </ScrollView>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

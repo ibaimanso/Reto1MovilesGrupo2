@@ -32,9 +32,15 @@
     <string name="modificar">Edit</string>
     <string name="eliminar">Delete</string>
     <string name="filtrar">Filter</string>
+    <string name="fecha">Date</string>
+    <string name="completado">%</string>
+    <string name="tiempoTotal">Time</string>
 
     <!-- Strings para alternador de idioma -->
     <string name="language_label">Language</string>
     <string name="language_spanish">Spanish</string>
     <string name="language_english">English</string>
+
+    <string name="theme_dark">Dark theme</string>
+    <string name="app_logo_desc">App Logo</string>
 </resources>
