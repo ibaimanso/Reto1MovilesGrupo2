@@ -7,6 +7,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.reto1movilesgrupo2.R
 import com.example.reto1movilesgrupo2.entities.Exercise
+import com.example.reto1movilesgrupo2.entities.Serie
 import com.example.reto1movilesgrupo2.entities.Workout
 import com.example.reto1movilesgrupo2.firebase.ManagerFactory
 
@@ -43,4 +44,19 @@ class ExerciseController : AppCompatActivity() {
 
         return ret
     }
+
+    suspend fun getExpectedTime(exercise: Exercise): Int {
+        val series: MutableList<Serie> = ControllerFactory().getSerieController().selectAllByExercise(exercise)
+
+        var totalTime: Int = 0
+
+
+        for (serie: Serie in series) {
+            totalTime += serie.expectedTime
+            totalTime += serie.restTime
+        }
+
+        return totalTime
+    }
+
 }
