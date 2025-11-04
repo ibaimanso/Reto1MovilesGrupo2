@@ -1,13 +1,11 @@
 package com.example.reto1movilesgrupo2.controllers
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.reto1movilesgrupo2.R
 import com.example.reto1movilesgrupo2.entities.User
 import com.example.reto1movilesgrupo2.firebase.ManagerFactory
+import com.example.reto1movilesgrupo2.firebase.exception.DBException
+
 
 class UserController : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,5 +62,19 @@ class UserController : AppCompatActivity() {
         }
 
         return false
+    }
+
+    suspend fun selectByFname(userToFind: User): User? {
+        var ret: User? = null
+        val users: MutableList<User> = selectAll()
+
+        for (user: User in users) {
+            if (user.fname.equals(userToFind.fname)) {
+                ret = user
+                break
+            }
+        }
+
+        return ret
     }
 }

@@ -8,7 +8,7 @@
     tools:context=".activities.WorkoutsActivity">
 
     <Button
-        android:id="@+id/btnPerfil"
+        android:id="@+id/btnProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/perfil"
@@ -34,7 +34,7 @@
         app:layout_constraintVertical_bias="0.008" />
 
     <ImageView
-        android:id="@+id/appLogoWorkout"
+        android:id="@+id/appLogo"
         android:layout_width="103dp"
         android:layout_height="103dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -178,9 +178,21 @@
         android:text="@string/volver"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.139"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.954" />
+        app:layout_constraintVertical_bias="0.95" />
+
+    <Button
+        android:id="@+id/btnTrainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/entrenador"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.801"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.95" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

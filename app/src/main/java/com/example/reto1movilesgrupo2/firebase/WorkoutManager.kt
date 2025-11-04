@@ -30,6 +30,11 @@ class WorkoutManager {
             // Recorrer los documentos y convertirlos en objetos User
             for (document in workouts) {
                 val workout = document.toObject(Workout::class.java)
+
+                if (workout.id == 0) {
+                    continue
+                }
+
                 ret.add(Workout(
                     workout.id,
                     workout.level,
