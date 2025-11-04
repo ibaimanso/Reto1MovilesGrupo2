@@ -36,7 +36,7 @@ class WorkoutsActivity : AppCompatActivity() {
 
     private lateinit var logo: ImageView
 
-    private lateinit var userLevel: TextView
+    private lateinit var userLevelTextView: TextView
 
     private lateinit var inputLevelFilter: EditText
 
@@ -62,11 +62,15 @@ class WorkoutsActivity : AppCompatActivity() {
 
         workoutTable = findViewById(R.id.workoutTable)
 
+        userLevelTextView = findViewById(R.id.userLevel)
+
         userName = intent.getStringExtra("USERFNAME").toString()
 
         btnTrainer.visibility = Button.GONE
 
         lifecycleScope.launch {
+            establishUserLevel()
+
             val workoutsByLevel: MutableList<Workout>? = loadWorkoutsByLevel()
             insertIntoTable(workoutsByLevel)
 
@@ -134,6 +138,17 @@ class WorkoutsActivity : AppCompatActivity() {
         if (user.trainer) {
             btnTrainer.visibility = Button.VISIBLE
         }
+    }
+
+    suspend fun establishUserLevel() {
+        val tempUser = User()
+        tempUser.fname = userName
+
+        var user: User? =
+            ControllerFactory.getInstance()?.getUserController()?.selectByFname(tempUser)
+        if (user == null) user = User()
+
+        userLevelTextView.setText(user.level.toString())
     }
 
     suspend fun insertIntoTable(workouts: MutableList<Workout>?) {
