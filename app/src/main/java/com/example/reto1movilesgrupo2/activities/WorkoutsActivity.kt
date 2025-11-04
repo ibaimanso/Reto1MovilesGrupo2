@@ -12,6 +12,7 @@ import android.widget.ImageView
 import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -36,7 +37,7 @@ class WorkoutsActivity : AppCompatActivity() {
 
     private lateinit var logo: ImageView
 
-    private lateinit var userLevel: TextView
+    private lateinit var userLevelTextView: TextView
 
     private lateinit var inputLevelFilter: EditText
 
@@ -62,11 +63,16 @@ class WorkoutsActivity : AppCompatActivity() {
 
         workoutTable = findViewById(R.id.workoutTable)
 
+        userLevelTextView = findViewById(R.id.userLevel)
+        inputLevelFilter = findViewById(R.id.inputLevelFilter)
+
         userName = intent.getStringExtra("USERFNAME").toString()
 
         btnTrainer.visibility = Button.GONE
 
         lifecycleScope.launch {
+            establishUserLevel()
+
             val workoutsByLevel: MutableList<Workout>? = loadWorkoutsByLevel()
             insertIntoTable(workoutsByLevel)
 
@@ -88,6 +94,11 @@ class WorkoutsActivity : AppCompatActivity() {
             goToProfile()
         }
 
+        btnFilter.setOnClickListener {
+            lifecycleScope.launch {
+                updateFilteredWorkouts()
+            }
+        }
     }
 
     private fun goBack() {
@@ -104,8 +115,46 @@ class WorkoutsActivity : AppCompatActivity() {
 
     private fun goToProfile() {
         val intent = Intent(this, PerfilActivity::class.java)
+        intent.putExtra("USERFNAME", userName)
         startActivity(intent)
         finish()
+    }
+
+    private suspend fun updateFilteredWorkouts() {
+        val levelInput = inputLevelFilter.text.toString().trim()
+
+        if(levelInput.isEmpty()) {
+            Toast.makeText(
+                this,
+                "El campo no puede estar vacío.",
+                Toast.LENGTH_SHORT
+            ).show()
+            return
+        }
+
+        val level = levelInput.toIntOrNull()
+        if (null == level) {
+            Toast.makeText(
+                this,
+                "Introduce un nivel válido.",
+                Toast.LENGTH_SHORT
+            ).show()
+            return
+        }
+
+        val allWorkouts = loadWorkoutsByLevel()
+        val filtered = filterWorkoutsByLevel(allWorkouts, level)
+        refreshTable(filtered)
+    }
+
+    private fun filterWorkoutsByLevel (workouts: MutableList<Workout>?, level: Int): MutableList<Workout>? {
+        return workouts?.filter { it.level == level }?.toMutableList()
+    }
+
+    private suspend fun refreshTable(workouts: MutableList<Workout>?) {
+        //workoutTable.removeAllViews()
+        workoutTable.removeViews(1, workoutTable.childCount - 1)
+        insertIntoTable(workouts)
     }
 
     suspend fun loadWorkoutsByLevel(): MutableList<Workout>? {
@@ -120,7 +169,6 @@ class WorkoutsActivity : AppCompatActivity() {
             ControllerFactory.getInstance()?.getWorkoutController()?.selectByLevel(user)
 
         return workouts
-
     }
 
     suspend fun showTrainerButtonIfNeeded() {
@@ -134,6 +182,17 @@ class WorkoutsActivity : AppCompatActivity() {
         if (user.trainer) {
             btnTrainer.visibility = Button.VISIBLE
         }
+    }
+
+    suspend fun establishUserLevel() {
+        val tempUser = User()
+        tempUser.fname = userName
+
+        var user: User? =
+            ControllerFactory.getInstance()?.getUserController()?.selectByFname(tempUser)
+        if (user == null) user = User()
+
+        userLevelTextView.setText(user.level.toString())
     }
 
     suspend fun insertIntoTable(workouts: MutableList<Workout>?) {
@@ -162,7 +221,21 @@ class WorkoutsActivity : AppCompatActivity() {
             val timeView = createCell("${ControllerFactory().getWorkoutController().getExpectedTime(workout)} min")
             val dateView = createCell("")
             val completedView = createCell("")
-            val videoView = createCell(workout.videoUrl)
+
+            val videoView = createCell(workout.videoUrl).apply {
+                text = "Vídeo orientativo"
+                setTextColor(Color.BLUE)
+                setOnClickListener {
+                    val videoUrl = workout.videoUrl
+
+                    try {
+                        val intent = Intent(Intent.ACTION_VIEW, android.net.Uri.parse(videoUrl))
+                        startActivity(intent)
+                    } catch (e: Exception) {
+                        Toast.makeText(this@WorkoutsActivity, "No se pudo abrir el video", Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
 
             // Añadir las celdas a la fila
             row.addView(nameView)
@@ -176,4 +249,5 @@ class WorkoutsActivity : AppCompatActivity() {
             workoutTable.addView(row)
         }
     }
+
 }
