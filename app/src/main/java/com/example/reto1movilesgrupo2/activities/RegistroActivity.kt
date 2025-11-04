@@ -3,6 +3,8 @@ package com.example.reto1movilesgrupo2.activities
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -50,7 +52,21 @@ class RegistroActivity : AppCompatActivity() {
         inputPw    = findViewById(R.id.inputPassword)
         inputEmail = findViewById(R.id.inputEmail)
         inputBirth = findViewById(R.id.inputBirth)
+
+        val typeValues = arrayOf(
+            "Ususario",
+            "Entrenador"
+        )
+        val typeAdapter = ArrayAdapter(
+            this,
+            android.R.layout.simple_spinner_item,
+            typeValues
+        )
+        typeAdapter.setDropDownViewResource(
+            android.R.layout.simple_spinner_dropdown_item
+        )
         inputType  = findViewById(R.id.userType)
+        inputType.adapter = typeAdapter
 
         btnRegister = findViewById(R.id.btnRegister)
         btnRegister.setOnClickListener {
@@ -105,6 +121,7 @@ class RegistroActivity : AppCompatActivity() {
         }
 
         user.lastMod = LocalDateTime.now().toString()
+        user.trainer = inputType.selectedItem.toString() == "Entrenador"
 
         ControllerFactory().getUserController().insert(user)
 
@@ -113,6 +130,7 @@ class RegistroActivity : AppCompatActivity() {
             "Registrado con exito.",
             Toast.LENGTH_LONG
         ).show()
+
 
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
