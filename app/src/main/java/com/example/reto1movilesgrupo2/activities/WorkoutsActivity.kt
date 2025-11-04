@@ -115,6 +115,7 @@ class WorkoutsActivity : AppCompatActivity() {
 
     private fun goToProfile() {
         val intent = Intent(this, PerfilActivity::class.java)
+        intent.putExtra("USERFNAME", userName)
         startActivity(intent)
         finish()
     }
