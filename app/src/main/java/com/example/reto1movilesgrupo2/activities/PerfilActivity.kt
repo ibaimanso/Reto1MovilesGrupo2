@@ -1,13 +1,16 @@
 package com.example.reto1movilesgrupo2.activities
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.renderscript.ScriptGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
 import androidx.core.view.ViewCompat
@@ -18,6 +21,7 @@ import com.example.reto1movilesgrupo2.controllers.ControllerFactory
 import com.example.reto1movilesgrupo2.entities.User
 import kotlinx.coroutines.launch
 import org.intellij.lang.annotations.Language
+import java.time.LocalDateTime
 
 class PerfilActivity : AppCompatActivity() {
 
@@ -37,6 +41,7 @@ class PerfilActivity : AppCompatActivity() {
 
     private lateinit var userName: String
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -73,7 +78,9 @@ class PerfilActivity : AppCompatActivity() {
         }
 
         btnSave.setOnClickListener {
-
+            lifecycleScope.launch {
+                saveChanges()
+            }
         }
 
     }
@@ -84,9 +91,7 @@ class PerfilActivity : AppCompatActivity() {
         finish()
     }
 
-    private fun saveChanges() {
 
-    }
 
     suspend fun loadData() {
         val tempUser = User()
@@ -100,6 +105,34 @@ class PerfilActivity : AppCompatActivity() {
         inputLName.setText(user.lname)
         inputEmail.setText(user.email)
         inputBirth.setText(user.birth)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    suspend fun saveChanges() {
+        val userToSend = User()
+
+        val tempUser = User()
+        tempUser.fname = userName
+
+        var user: User? =
+            ControllerFactory().getUserController().selectByFname(tempUser)
+        if (user == null) user = User()
+
+        userToSend.id = user.id
+        userToSend.lastMod = LocalDateTime.now().toString()
+        userToSend.level = user.level
+        userToSend.pw = user.pw
+        userToSend.trainer = user.trainer
+
+        userName = inputFName.text.toString()
+        userToSend.fname = inputFName.text.toString()
+        userToSend.lname = inputLName.text.toString()
+        userToSend.email = inputEmail.text.toString()
+        userToSend.birth = inputBirth.text.toString()
+
+        ControllerFactory().getUserController().update(userToSend)
+
+        Toast.makeText(this, "Cambios guardados.", Toast.LENGTH_LONG).show()
     }
 
 }
