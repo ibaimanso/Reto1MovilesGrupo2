@@ -16,7 +16,7 @@
     <string name="nombreLabel">Nombre</string>
     <string name="apellidosLabel">Apellidos</string>
     <string name="emailLabel">Email</string>
-    <string name="fechaLabel">Fecha Nacimiento</string>
+    <string name="fechaLabel">Nacimiento</string>
     <string name="tipo_de_usuario">Tipo de Usuario:</string>
 
     <string name="nivel_de_usuario">Nivel de Usuario:</string>
