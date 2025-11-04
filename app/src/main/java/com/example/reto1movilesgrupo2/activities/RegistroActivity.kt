@@ -1,19 +1,24 @@
 package com.example.reto1movilesgrupo2.activities
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.reto1movilesgrupo2.R
+import com.example.reto1movilesgrupo2.controllers.ControllerFactory
 import com.example.reto1movilesgrupo2.entities.User
 import kotlinx.coroutines.launch
+import java.time.LocalDateTime
 
 class RegistroActivity : AppCompatActivity() {
     private lateinit var logo:        ImageView
@@ -26,6 +31,7 @@ class RegistroActivity : AppCompatActivity() {
     private lateinit var btnRegister: Button
     private lateinit var btnGoBack:   Button
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -61,7 +67,8 @@ class RegistroActivity : AppCompatActivity() {
         }
     }
 
-    private fun register() {
+    @RequiresApi(Build.VERSION_CODES.O)
+    private suspend fun register() {
         val user = User()
 
         user.fname = inputFname.text.toString()
@@ -70,6 +77,45 @@ class RegistroActivity : AppCompatActivity() {
         user.email = inputEmail.text.toString()
         user.birth = inputBirth.text.toString()
 
-        // #TODO
+        if (user.fname.equals("")) {
+            Toast.makeText(
+                this,
+                "El nombre está vacío.",
+                Toast.LENGTH_LONG
+            ).show()
+            return
+        }
+
+        if (user.pw.equals("")) {
+            Toast.makeText(
+                this,
+                "La contraseña está vacía.",
+                Toast.LENGTH_LONG
+            ).show()
+            return
+        }
+
+        if (ControllerFactory().getUserController().existUser(user)) {
+            Toast.makeText(
+                this,
+                "El nombre de usuario está en uso.",
+                Toast.LENGTH_LONG
+            ).show()
+            return
+        }
+
+        user.lastMod = LocalDateTime.now().toString()
+
+        ControllerFactory().getUserController().insert(user)
+
+        Toast.makeText(
+            this,
+            "Registrado con exito.",
+            Toast.LENGTH_LONG
+        ).show()
+
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }
