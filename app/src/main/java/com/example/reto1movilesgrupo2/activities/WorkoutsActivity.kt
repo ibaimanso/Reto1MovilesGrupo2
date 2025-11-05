@@ -161,7 +161,7 @@ class WorkoutsActivity : AppCompatActivity() {
         refreshTable(filtered)
     }
 
-    private fun filterWorkoutsByLevel (workouts: MutableList<Workout>?, level: Int): MutableList<Workout>? {
+    private fun filterWorkoutsByLevel(workouts: MutableList<Workout>?, level: Int): MutableList<Workout>? {
         return workouts?.filter { it.level == level }?.toMutableList()
     }
 
