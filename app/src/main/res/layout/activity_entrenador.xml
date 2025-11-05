@@ -25,14 +25,16 @@
         android:id="@+id/inputFilter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:autofillHints="level"
         android:ems="10"
-        android:inputType="text"
+        android:hint="@string/nivel"
+        android:inputType="number"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.029"
+        app:layout_constraintHorizontal_bias="0.034"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.266" />
+        app:layout_constraintVertical_bias="0.199" />
 
     <Button
         android:id="@+id/btnFilter"
@@ -44,38 +46,74 @@
         app:layout_constraintHorizontal_bias="0.932"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.265" />
+        app:layout_constraintVertical_bias="0.2" />
 
-    <com.google.android.material.tabs.TabLayout
-        android:layout_width="398dp"
-        android:layout_height="71dp"
+    <ScrollView
+        android:layout_width="387dp"
+        android:layout_height="431dp"
+        android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.461"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.345">
+        app:layout_constraintVertical_bias="0.55">
 
-            <com.google.android.material.tabs.TabItem
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true"
+            android:scrollbars="horizontal">
+
+            <TableLayout
+                android:id="@+id/workoutTable"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/nombre" />
+                android:stretchColumns="*"
+                android:divider="@android:color/darker_gray"
+                android:showDividers="middle"
+                android:layout_marginTop="16dp"
+                android:layout_marginHorizontal="8dp"
+                android:background="@android:color/white" >
 
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/descripcion" />
+                <TableRow
+                    android:background="#EEEEEE"
+                    android:padding="8dp">
 
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/nivel" />
+                    <TextView
+                        android:text="@string/nombre"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:padding="8dp" />
 
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/video" />
-    </com.google.android.material.tabs.TabLayout>
+                    <TextView
+                        android:text="@string/descripcion"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:padding="8dp" />
+
+                    <TextView
+                        android:text="@string/nivel"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:padding="8dp" />
+
+                    <TextView
+                        android:text="Ejercicios"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:padding="8dp" />
+
+                    <TextView
+                        android:text="@string/video"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:padding="8dp" />
+
+                </TableRow>
+            </TableLayout>
+        </HorizontalScrollView>
+    </ScrollView>
 
     <Button
         android:id="@+id/btnAdd"
@@ -112,5 +150,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.879" />
+
+    <Button
+        android:id="@+id/btnVolver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/volver"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.022"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023" />
+
+    <ImageView
+        android:id="@+id/appLogo2"
+        android:layout_width="84dp"
+        android:layout_height="93dp"
+        android:contentDescription="@string/app_logo_desc"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.96"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.056"
+        tools:src="@tools:sample/avatars" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
