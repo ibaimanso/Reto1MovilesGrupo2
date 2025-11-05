@@ -98,6 +98,7 @@ class PerfilActivity : AppCompatActivity() {
 
     private fun goBack() {
         val intent = Intent(this, WorkoutsActivity::class.java)
+        intent.putExtra("USERFNAME", userName)
         startActivity(intent)
         finish()
     }

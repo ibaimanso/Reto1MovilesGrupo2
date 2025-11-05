@@ -109,6 +109,7 @@ class WorkoutsActivity : AppCompatActivity() {
 
     private fun goToTrainer() {
         val intent = Intent(this, EntrenadorActivity::class.java)
+        intent.putExtra("USERFNAME", userName)
         startActivity(intent)
         finish()
     }

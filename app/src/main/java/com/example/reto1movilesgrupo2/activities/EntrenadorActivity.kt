@@ -3,10 +3,11 @@ package com.example.reto1movilesgrupo2.activities
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.text.TextUtils
-import android.view.Gravity
+import android.text.InputType
 import android.widget.Button
 import android.widget.EditText
+import android.text.TextUtils
+import android.view.Gravity
 import android.widget.ImageView
 import android.widget.TableLayout
 import android.widget.TableRow
@@ -35,6 +36,8 @@ class EntrenadorActivity : AppCompatActivity() {
     private lateinit var btnDelete: Button
     private lateinit var appLogo2: ImageView
 
+    private lateinit var userName: String
+
     private var allWorkouts: MutableList<Workout> = mutableListOf()
     private var selectedWorkout: Workout? = null
 
@@ -58,6 +61,8 @@ class EntrenadorActivity : AppCompatActivity() {
         btnAdd = findViewById(R.id.btnAdd)
         btnModify = findViewById(R.id.btnModify)
         btnDelete = findViewById(R.id.btnDelete)
+
+        userName = intent.getStringExtra("USERFNAME").toString()
 
         lifecycleScope.launch {
             loadWorkouts()
@@ -96,6 +101,7 @@ class EntrenadorActivity : AppCompatActivity() {
 
     private fun goBack() {
         val intent = Intent(this, WorkoutsActivity::class.java)
+        intent.putExtra("USERFNAME", userName)
         startActivity(intent)
         finish()
     }
