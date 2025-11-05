@@ -4,6 +4,10 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.renderscript.ScriptGroup
+import android.util.Log
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -12,7 +16,9 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SwitchCompat
+import androidx.core.os.LocaleListCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
@@ -22,6 +28,7 @@ import com.example.reto1movilesgrupo2.entities.User
 import kotlinx.coroutines.launch
 import org.intellij.lang.annotations.Language
 import java.time.LocalDateTime
+import java.util.Locale
 
 class PerfilActivity : AppCompatActivity() {
 
@@ -83,6 +90,10 @@ class PerfilActivity : AppCompatActivity() {
             }
         }
 
+        configSpinner()
+
+        Log.i("PRUEBAPRUEBAPRUEBAPRUEBAPRUEBA",Locale.getDefault().language)
+
     }
 
     private fun goBack() {
@@ -91,7 +102,47 @@ class PerfilActivity : AppCompatActivity() {
         finish()
     }
 
+    private fun changeLanguage(languageCode: String) {
+        val currentLanguage = Locale.getDefault().language
 
+        if (currentLanguage != languageCode) {
+            val locale = Locale(languageCode)
+            Locale.setDefault(locale)
+            val config = resources.configuration
+            config.setLocale(locale)
+            baseContext.resources.updateConfiguration(config, baseContext.resources.displayMetrics)
+        }
+    }
+
+    private fun configSpinner() {
+        val languages = arrayOf("Español", "Inglés")
+        val spinner = findViewById<Spinner>(R.id.spinnerLanguage)
+
+
+        val adapter = ArrayAdapter(
+            this,
+            android.R.layout.simple_spinner_item,
+            languages
+        )
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner.adapter = adapter
+
+
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parentView: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                when (position) {
+                    0 -> changeLanguage("es")
+                    1 -> changeLanguage("en")
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+
+        }
+    }
 
     suspend fun loadData() {
         val tempUser = User()

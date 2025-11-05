@@ -34,7 +34,7 @@
     <string name="filtrar">Filter</string>
     <string name="fecha">Date</string>
     <string name="completado">%</string>
-    <string name="tiempoTotal">Time</string>
+    <string name="tiempoTotal">Total time</string>
 
     <!-- Strings para alternador de idioma -->
     <string name="language_label">Language</string>
