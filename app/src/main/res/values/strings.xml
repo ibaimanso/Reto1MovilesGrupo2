@@ -34,6 +34,8 @@
     <string name="fecha">Fecha</string>
     <string name="completado">%</string>
     <string name="tiempoTotal">Tiempo total</string>
+    <string name="historial">Historial</string>
+    <string name="no_historial">No hay workouts completados en tu historial</string>
 
     <!-- Strings para alternador de idioma -->
     <string name="language_label">Idioma</string>

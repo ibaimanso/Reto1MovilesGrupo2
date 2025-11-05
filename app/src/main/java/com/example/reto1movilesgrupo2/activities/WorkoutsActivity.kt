@@ -32,6 +32,7 @@ class WorkoutsActivity : AppCompatActivity() {
     private lateinit var btnBack: Button
     private lateinit var btnFilter: Button
     private lateinit var btnTrainer: Button
+    private lateinit var btnHistorial: Button
 
     private lateinit var workoutTable: TableLayout
 
@@ -60,6 +61,7 @@ class WorkoutsActivity : AppCompatActivity() {
         btnBack = findViewById(R.id.btnBack)
         btnFilter = findViewById(R.id.btnFilter)
         btnTrainer = findViewById(R.id.btnTrainer)
+        btnHistorial = findViewById(R.id.btnHistorial)
 
         workoutTable = findViewById(R.id.workoutTable)
 
@@ -90,6 +92,10 @@ class WorkoutsActivity : AppCompatActivity() {
             }
         }
 
+        btnHistorial.setOnClickListener {
+            goToHistorial()
+        }
+
         btnProfile.setOnClickListener {
             goToProfile()
         }
@@ -116,6 +122,13 @@ class WorkoutsActivity : AppCompatActivity() {
 
     private fun goToProfile() {
         val intent = Intent(this, PerfilActivity::class.java)
+        intent.putExtra("USERFNAME", userName)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun goToHistorial() {
+        val intent = Intent(this, HistorialActivity::class.java)
         intent.putExtra("USERFNAME", userName)
         startActivity(intent)
         finish()
