@@ -91,8 +91,7 @@ class PerfilActivity : AppCompatActivity() {
         }
 
         configSpinner()
-
-        Log.i("PRUEBAPRUEBAPRUEBAPRUEBAPRUEBA",Locale.getDefault().language)
+        configSwitch()
 
     }
 
@@ -104,44 +103,58 @@ class PerfilActivity : AppCompatActivity() {
     }
 
     private fun changeLanguage(languageCode: String) {
-        val currentLanguage = Locale.getDefault().language
-
-        if (currentLanguage != languageCode) {
-            val locale = Locale(languageCode)
-            Locale.setDefault(locale)
-            val config = resources.configuration
-            config.setLocale(locale)
-            baseContext.resources.updateConfiguration(config, baseContext.resources.displayMetrics)
-        }
+        val appLocale: LocaleListCompat = LocaleListCompat.forLanguageTags(languageCode)
+        AppCompatDelegate.setApplicationLocales(appLocale)
     }
 
     private fun configSpinner() {
-        val languages = arrayOf("Español", "Inglés")
-        val spinner = findViewById<Spinner>(R.id.spinnerLanguage)
 
-
-        val adapter = ArrayAdapter(
-            this,
-            android.R.layout.simple_spinner_item,
-            languages
-        )
+        val languages = arrayOf(getString(R.string.language_spanish), getString(R.string.language_english))
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, languages)
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinner.adapter = adapter
+        languageSpinner.adapter = adapter
 
+        languageSpinner.setSelection(0)
 
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parentView: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                when (position) {
-                    0 -> changeLanguage("es")
-                    1 -> changeLanguage("en")
+        languageSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val languageCode = when (position) {
+                    0 -> "es"
+                    1 -> "en"
+                    else -> "es"
+                }
+                val currentLocale = AppCompatDelegate.getApplicationLocales()[0]?.language
+
+                if (currentLocale != languageCode) {
+                    changeLanguage(languageCode)
                 }
             }
-
             override fun onNothingSelected(parent: AdapterView<*>?) {
-
+                // No es necesario hacer nada aquí
             }
+        }
+    }
 
+    private fun setDarkMode() {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+    }
+
+    private fun setLightMode() {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+    }
+
+    private fun configSwitch() {
+        val currentNightMode = AppCompatDelegate.getDefaultNightMode()
+
+        switchTheme.isChecked = currentNightMode == AppCompatDelegate.MODE_NIGHT_YES
+
+        switchTheme.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                setDarkMode()
+            } else {
+                setLightMode()
+            }
         }
     }
 
