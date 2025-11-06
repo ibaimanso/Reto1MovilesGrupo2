@@ -28,21 +28,22 @@ import java.util.Locale
 
 class WorkoutsActivity : AppCompatActivity() {
 
+    private lateinit var logo: ImageView
+
     private lateinit var btnProfile: Button
     private lateinit var btnBack: Button
     private lateinit var btnFilter: Button
     private lateinit var btnTrainer: Button
-    private lateinit var btnHistorial: Button
 
     private lateinit var workoutTable: TableLayout
-
-    private lateinit var logo: ImageView
 
     private lateinit var userLevelTextView: TextView
 
     private lateinit var inputLevelFilter: EditText
 
     private lateinit var userName: String
+    private var userId: Int = 0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,7 +62,6 @@ class WorkoutsActivity : AppCompatActivity() {
         btnBack = findViewById(R.id.btnBack)
         btnFilter = findViewById(R.id.btnFilter)
         btnTrainer = findViewById(R.id.btnTrainer)
-        btnHistorial = findViewById(R.id.btnHistorial)
 
         workoutTable = findViewById(R.id.workoutTable)
 
@@ -75,8 +75,7 @@ class WorkoutsActivity : AppCompatActivity() {
         lifecycleScope.launch {
             establishUserLevel()
 
-            val workoutsByLevel: MutableList<Workout>? = loadWorkoutsByLevel()
-            insertIntoTable(workoutsByLevel)
+            loadCompletedWorkouts()
 
             showTrainerButtonIfNeeded()
         }
@@ -90,10 +89,6 @@ class WorkoutsActivity : AppCompatActivity() {
             lifecycleScope.launch {
                 goToTrainer()
             }
-        }
-
-        btnHistorial.setOnClickListener {
-            goToHistorial()
         }
 
         btnProfile.setOnClickListener {
@@ -127,22 +122,38 @@ class WorkoutsActivity : AppCompatActivity() {
         finish()
     }
 
-    private fun goToHistorial() {
-        val intent = Intent(this, HistorialActivity::class.java)
-        intent.putExtra("USERFNAME", userName)
-        startActivity(intent)
-        finish()
+    private fun filterWorkoutsByLevel(workouts: MutableList<Workout>?, level: Int): MutableList<Workout>? {
+        return workouts?.filter { it.level == level }?.toMutableList()
+    }
+
+    private fun formatDate(dateString: String?): String {
+        if (dateString.isNullOrEmpty()) {
+            return "Sin fecha"
+        }
+
+        return try {
+            val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.getDefault())
+            val outputFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            val date = inputFormat.parse(dateString)
+            if (date != null) {
+                outputFormat.format(date)
+            } else {
+                dateString.substring(0, 10)
+            }
+        } catch (_: Exception) {
+            try {
+                dateString.substring(0, 10).replace("-", "/")
+            } catch (_: Exception) {
+                "Fecha inválida"
+            }
+        }
     }
 
     private suspend fun updateFilteredWorkouts() {
         val levelInput = inputLevelFilter.text.toString().trim()
 
         if(levelInput.isEmpty()) {
-            Toast.makeText(
-                this,
-                "El campo no puede estar vacío.",
-                Toast.LENGTH_SHORT
-            ).show()
+            loadCompletedWorkouts()
             return
         }
 
@@ -155,34 +166,77 @@ class WorkoutsActivity : AppCompatActivity() {
             ).show()
             return
         }
-
-        val allWorkouts = loadWorkoutsByLevel()
+1
+        val allWorkouts = getCompletedWorkouts()
         val filtered = filterWorkoutsByLevel(allWorkouts, level)
         refreshTable(filtered)
     }
 
-    private fun filterWorkoutsByLevel(workouts: MutableList<Workout>?, level: Int): MutableList<Workout>? {
-        return workouts?.filter { it.level == level }?.toMutableList()
+    private suspend fun getUserId() {
+        val tempUser = User()
+        tempUser.fname = userName
+        val user = ControllerFactory.getInstance()?.getUserController()?.selectByFname(tempUser)
+        userId = user?.id ?: 0
     }
 
     private suspend fun refreshTable(workouts: MutableList<Workout>?) {
-        //workoutTable.removeAllViews()
         workoutTable.removeViews(1, workoutTable.childCount - 1)
         insertIntoTable(workouts)
     }
 
-    suspend fun loadWorkoutsByLevel(): MutableList<Workout>? {
-        val tempUser = User()
-        tempUser.fname = userName
+    private suspend fun getCompletedWorkouts(): MutableList<Workout>? {
+        getUserId()
 
-        var user: User? =
-            ControllerFactory.getInstance()?.getUserController()?.selectByFname(tempUser)
-        if (user == null) user = User()
+        if (userId == 0) {
+            return mutableListOf()
+        }
 
-        val workouts: MutableList<Workout>? =
-            ControllerFactory.getInstance()?.getWorkoutController()?.selectByLevel(user)
+        val allUserWorkoutLines = ControllerFactory.getInstance()?.getUserWorkoutLineController()?.selectAll() ?: mutableListOf()
+        val completedUserWorkoutLines = allUserWorkoutLines.filter { it.userId == userId }
 
-        return workouts
+        val allWorkouts = ControllerFactory.getInstance()?.getWorkoutController()?.selectAll() ?: mutableListOf()
+        val completedWorkouts = completedUserWorkoutLines.mapNotNull { userWorkoutLine ->
+            allWorkouts.find { it.id == userWorkoutLine.workoutId }
+        }
+
+        return completedWorkouts.toMutableList()
+    }
+
+    private suspend fun getCompletedDate(workoutId: Int): String {
+        val userWorkoutLines = ControllerFactory.getInstance()?.getUserWorkoutLineController()?.selectAll() ?: mutableListOf()
+        val completedWorkoutLine = userWorkoutLines.find { it.workoutId == workoutId && it.userId == userId }
+
+        return if (completedWorkoutLine != null) {
+            formatDate(completedWorkoutLine.doneDate)
+        } else {
+            "Sin fecha"
+        }
+    }
+
+    suspend fun loadCompletedWorkouts() {
+        val completedWorkouts: MutableList<Workout>? = getCompletedWorkouts()
+        insertIntoTable(completedWorkouts)
+    }
+
+    suspend fun calculateCompletionPercentage(workout: Workout): Int {
+        val allExercises = ControllerFactory.getInstance()?.getExerciseController()?.selectAllByWorkout(workout) ?: mutableListOf()
+        val allUserExerciseLines = ControllerFactory.getInstance()?.getUserExerciseLineController()?.selectAll() ?: mutableListOf()
+
+        if (allExercises.isEmpty()) {
+            return 0
+        }
+
+        var completedExercises = 0
+        for (exercise in allExercises) {
+            val isCompleted = allUserExerciseLines.any {
+                it.userId == userId && it.exerciseId == exercise.id
+            }
+            if (isCompleted) {
+                completedExercises++
+            }
+        }
+
+        return (completedExercises * 100) / allExercises.size
     }
 
     suspend fun showTrainerButtonIfNeeded() {
@@ -212,7 +266,8 @@ class WorkoutsActivity : AppCompatActivity() {
     suspend fun insertIntoTable(workouts: MutableList<Workout>?) {
         val dateFormat = SimpleDateFormat("yyyy-mm-dd", Locale.getDefault())
 
-        if (workouts == null) {
+        if (workouts == null || workouts.isEmpty()) {
+            Toast.makeText(this@WorkoutsActivity, "No tienes workouts completados", Toast.LENGTH_LONG).show()
             return
         }
 
@@ -232,12 +287,18 @@ class WorkoutsActivity : AppCompatActivity() {
             // Crear las celdas
             val nameView = createCell(workout.name)
             val levelView = createCell(workout.level.toString())
-            val timeView = createCell("${ControllerFactory().getWorkoutController().getExpectedTime(workout)} min")
-            val dateView = createCell("")
-            val completedView = createCell("")
+
+            val totalTime = ControllerFactory().getWorkoutController().getExpectedTime(workout)
+            val timeView = createCell("$totalTime min")
+
+            val completedDate = getCompletedDate(workout.id)
+            val dateView = createCell(completedDate)
+
+            val completionPercentage = calculateCompletionPercentage(workout)
+            val completedView = createCell("$completionPercentage%")
 
             val videoView = createCell(workout.videoUrl).apply {
-                text = "Vídeo orientativo"
+                text = getString(R.string.videoOrientativo)
                 setTextColor(Color.BLUE)
                 setOnClickListener {
                     val videoUrl = workout.videoUrl

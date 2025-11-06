@@ -18,7 +18,7 @@
     <string name="apellidosLabel">Last name</string>
     <string name="emailLabel">Email</string>
     <string name="fechaLabel">Birth date</string>
-    <string name="tipo_de_usuario">User type:</string>
+    <string name="tipoUsuario">Tipo de Usuario:</string>
 
     <string name="nivel_de_usuario">User level:</string>
     <string name="perfil">Profile</string>
@@ -35,6 +35,9 @@
     <string name="fecha">Date</string>
     <string name="completado">%</string>
     <string name="tiempoTotal">Total time</string>
+    <string name="historial">Record</string>
+    <string name="no_historial">You haven\'t completed any Workout</string>
+    <string name="videoOrientativo">Orientative video</string>
 
 
     <string name="language_label">Language</string>

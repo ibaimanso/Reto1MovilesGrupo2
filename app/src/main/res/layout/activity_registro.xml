@@ -170,7 +170,7 @@
         android:id="@+id/lblUserType"
         android:layout_width="148dp"
         android:layout_height="30sp"
-        android:text="@string/tipo_de_usuario"
+        android:text="@string/tipoUsuario"
         android:textAlignment="center"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"

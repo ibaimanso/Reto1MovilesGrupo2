@@ -60,9 +60,6 @@
         <activity
             android:name=".controllers.UserController"
             android:exported="false" />
-        <activity
-            android:name=".activities.HistorialActivity"
-            android:exported="false" />
     </application>
 
 </manifest>

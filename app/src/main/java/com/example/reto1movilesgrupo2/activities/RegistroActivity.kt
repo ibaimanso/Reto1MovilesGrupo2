@@ -54,8 +54,8 @@ class RegistroActivity : AppCompatActivity() {
         inputBirth = findViewById(R.id.inputBirth)
 
         val typeValues = arrayOf(
-            "Ususario",
-            "Entrenador"
+            getString(R.string.usuarioLabel),
+            getString(R.string.entrenador)
         )
         val typeAdapter = ArrayAdapter(
             this,
@@ -121,7 +121,7 @@ class RegistroActivity : AppCompatActivity() {
         }
 
         user.lastMod = LocalDateTime.now().toString()
-        user.trainer = inputType.selectedItem.toString() == "Entrenador"
+        user.trainer = inputType.selectedItem.toString() == getString(R.string.entrenador)
 
         ControllerFactory().getUserController().insert(user)
 

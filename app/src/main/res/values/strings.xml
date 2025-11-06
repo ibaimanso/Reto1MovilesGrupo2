@@ -17,7 +17,7 @@
     <string name="apellidosLabel">Apellidos</string>
     <string name="emailLabel">Email</string>
     <string name="fechaLabel">Nacimiento</string>
-    <string name="tipo_de_usuario">Tipo de Usuario:</string>
+    <string name="tipoUsuario">Tipo de Usuario:</string>
 
     <string name="nivel_de_usuario">Nivel de Usuario:</string>
     <string name="perfil">Perfil</string>
@@ -36,6 +36,7 @@
     <string name="tiempoTotal">Tiempo total</string>
     <string name="historial">Historial</string>
     <string name="no_historial">No hay workouts completados en tu historial</string>
+    <string name="videoOrientativo">Video orientativo</string>
 
 
     <string name="language_label">Idioma</string>
